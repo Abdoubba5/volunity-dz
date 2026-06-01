@@ -1,0 +1,322 @@
+{
+  "common": {
+    "appName": "Volunity DZ",
+    "tagline": "AI Powered Volunteering Platform",
+    "description": "An AI-powered volunteering platform connecting Algerian youth with volunteer opportunities, social initiatives, and community projects.",
+    "loading": "Loading...",
+    "search": "Search",
+    "seeMore": "See more",
+    "seeAll": "See all",
+    "joinNow": "Join now",
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "yes": "Yes",
+    "no": "No",
+    "or": "or",
+    "filter": "Filter",
+    "all": "All",
+    "today": "Today",
+    "thisWeek": "This week",
+    "thisMonth": "This month",
+    "thisYear": "This year",
+    "allTime": "All time",
+    "online": "Online",
+    "offline": "Offline",
+    "verified": "Verified"
+  },
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "associations": "Associations",
+    "leaderboard": "Leaderboard",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "login": "Login",
+    "register": "Sign up",
+    "logout": "Logout",
+    "contact": "Contact",
+    "menu": "Menu"
+  },
+  "home": {
+    "hero": {
+      "badge": "AI-Powered",
+      "title": "Be Part of the Change",
+      "subtitle": "Join thousands of Algerian youth making a difference in their communities through volunteering and social events.",
+      "ctaPrimary": "Start your journey",
+      "ctaSecondary": "Explore events",
+      "trustText": "Trusted by more than",
+      "trustCount": "12,500+ volunteers"
+    },
+    "stats": {
+      "volunteers": "Active volunteers",
+      "events": "Events completed",
+      "associations": "Partner associations",
+      "cities": "Cities involved"
+    },
+    "features": {
+      "title": "Why Volunity DZ?",
+      "subtitle": "A complete platform that brings together everything volunteers and associations need in one place.",
+      "items": {
+        "ai": {
+          "title": "AI Recommendations",
+          "description": "Personalized event suggestions that match your interests and location."
+        },
+        "qr": {
+          "title": "QR Attendance",
+          "description": "Fast and secure check-in via QR code scanning."
+        },
+        "badges": {
+          "title": "Rewards System",
+          "description": "Earn points, unlock badges, and level up with every event."
+        },
+        "community": {
+          "title": "Active Community",
+          "description": "Connect with volunteers and associations across Algeria."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Three simple steps to get started",
+      "steps": {
+        "1": {
+          "title": "Create your account",
+          "description": "Sign up in minutes and pick your interests"
+        },
+        "2": {
+          "title": "Discover events",
+          "description": "Browse AI-recommended events near you"
+        },
+        "3": {
+          "title": "Volunteer & earn",
+          "description": "Join events, earn points and badges"
+        }
+      }
+    },
+    "categories": {
+      "title": "Browse by category",
+      "subtitle": "Six main volunteering fields"
+    },
+    "featured": {
+      "title": "Featured Events",
+      "subtitle": "Discover the latest volunteering events in Algeria"
+    },
+    "topVolunteers": {
+      "title": "Top Volunteers",
+      "subtitle": "Meet the most active volunteers"
+    },
+    "associations": {
+      "title": "Partner Associations",
+      "subtitle": "Collaborate with the best associations in Algeria"
+    },
+    "testimonials": {
+      "title": "What our users say",
+      "subtitle": "Thousands of volunteers and associations trust Volunity"
+    },
+    "cta": {
+      "title": "Ready to make a change?",
+      "subtitle": "Join our platform today and be part of an active volunteering community",
+      "button": "Join for free"
+    }
+  },
+  "events": {
+    "title": "Events",
+    "subtitle": "Discover volunteering events across Algeria",
+    "createEvent": "Create event",
+    "categories": "Categories",
+    "allCategories": "All categories",
+    "location": "Location",
+    "date": "Date",
+    "time": "Time",
+    "participants": "Participants",
+    "capacity": "Capacity",
+    "organizer": "Organizer",
+    "joinEvent": "Join event",
+    "joined": "Joined",
+    "leaveEvent": "Leave event",
+    "noEvents": "No events available",
+    "noEventsDesc": "Try adjusting your filters or check back later",
+    "details": {
+      "about": "About event",
+      "location": "Location",
+      "date": "Date and time",
+      "category": "Category",
+      "organizer": "Organizer",
+      "participants": "Participants",
+      "gallery": "Gallery",
+      "schedule": "Schedule",
+      "requirements": "Requirements",
+      "tags": "Tags"
+    },
+    "categories_list": {
+      "education": "Education",
+      "environment": "Environment",
+      "health": "Health",
+      "culture": "Culture",
+      "sports": "Sports",
+      "social": "Social"
+    },
+    "create": {
+      "title": "Create new event",
+      "step1": "Basic info",
+      "step2": "Date & location",
+      "step3": "Details",
+      "step4": "Review",
+      "fields": {
+        "title": "Event title",
+        "description": "Description",
+        "category": "Category",
+        "date": "Date",
+        "time": "Time",
+        "location": "Location",
+        "city": "City",
+        "capacity": "Capacity",
+        "image": "Cover image",
+        "tags": "Tags"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to continue",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create account",
+      "orContinueWith": "Or continue with"
+    },
+    "register": {
+      "title": "Create new account",
+      "subtitle": "Join our volunteering community",
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "forgot": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email and we'll send you a reset link",
+      "email": "Email",
+      "submit": "Send reset link",
+      "backToLogin": "Back to login"
+    },
+    "googleLogin": "Continue with Google"
+  },
+  "footer": {
+    "about": "About",
+    "aboutText": "Volunity DZ is an AI-powered volunteering platform connecting Algerian youth with volunteer opportunities and social events across the country.",
+    "quickLinks": "Quick links",
+    "support": "Support",
+    "contactUs": "Contact us",
+    "helpCenter": "Help center",
+    "privacy": "Privacy policy",
+    "terms": "Terms of service",
+    "followUs": "Follow us",
+    "rights": "All rights reserved"
+  },
+  "profile": {
+    "title": "Profile",
+    "edit": "Edit profile",
+    "points": "Points",
+    "level": "Level",
+    "hours": "Volunteer hours",
+    "events": "Events",
+    "badges": "Badges",
+    "achievements": "Achievements",
+    "joined": "Joined",
+    "follow": "Follow",
+    "following": "Following",
+    "message": "Message",
+    "tabs": {
+      "about": "About",
+      "events": "Events",
+      "badges": "Badges",
+      "achievements": "Achievements"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "overview": "Overview",
+    "aiRecommendations": "AI Recommendations",
+    "upcomingEvents": "Upcoming events",
+    "recentActivity": "Recent activity",
+    "achievements": "Achievements",
+    "levelProgress": "Level progress",
+    "stats": {
+      "points": "Points",
+      "hours": "Hours",
+      "events": "Events",
+      "badges": "Badges"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Stay updated with the latest activity",
+    "all": "All",
+    "unread": "Unread",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications",
+    "emptyDesc": "Your notifications will appear here",
+    "categories": {
+      "events": "Events",
+      "badges": "Badges",
+      "social": "Social",
+      "system": "System"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "sections": {
+      "account": "Account",
+      "notifications": "Notifications",
+      "privacy": "Privacy",
+      "language": "Language",
+      "appearance": "Appearance",
+      "security": "Security"
+    },
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "bio": "Bio",
+      "university": "University",
+      "city": "City"
+    },
+    "theme": {
+      "title": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "empty": {
+    "noResults": "No results",
+    "noResultsDesc": "Try adjusting your search or filters",
+    "noEvents": "No events",
+    "noEventsDesc": "Be the first to create an event",
+    "noNotifications": "No notifications",
+    "noNotificationsDesc": "Your notifications will appear here",
+    "noBadges": "No badges",
+    "noBadgesDesc": "Join events to earn your first badges"
+  },
+  "loading": {
+    "default": "Loading...",
+    "events": "Loading events...",
+    "profile": "Loading profile..."
+  }
+}

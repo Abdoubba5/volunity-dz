@@ -1,0 +1,156 @@
+import * as React from 'react';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import {
+  Inbox,
+  SearchX,
+  CalendarOff,
+  BellOff,
+  Trophy,
+  Users,
+  FileX,
+  type LucideIcon,
+} from 'lucide-react';
+
+interface EmptyStateProps {
+  icon?: LucideIcon;
+  title: string;
+  description?: string;
+  action?: {
+    label: string;
+    href?: string;
+    onClick?: () => void;
+  };
+  className?: string;
+  variant?: 'default' | 'search' | 'events' | 'notifications' | 'achievements';
+}
+
+function EmptyState({
+  icon: Icon = Inbox,
+  title,
+  description,
+  action,
+  className,
+}: EmptyStateProps) {
+  return (
+    <div
+      className={cn(
+        'glass-card flex flex-col items-center justify-center text-center py-16 px-6',
+        className
+      )}
+    >
+      <div className="relative mb-6">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/20 to-secondary/20 blur-2xl rounded-full" />
+        <div className="relative h-20 w-20 rounded-2xl glass-strong flex items-center justify-center">
+          <Icon className="h-10 w-10 text-muted-foreground" strokeWidth={1.5} />
+        </div>
+      </div>
+
+      <h3 className="text-xl font-semibold mb-2 text-balance">{title}</h3>
+      {description && (
+        <p className="text-muted-foreground max-w-md mb-6 text-pretty">
+          {description}
+        </p>
+      )}
+
+      {action && (
+        <Button
+          asChild={!!action.href}
+          onClick={action.onClick}
+          variant="gradient"
+          size="lg"
+        >
+          {action.href ? <Link href={action.href}>{action.label}</Link> : action.label}
+        </Button>
+      )}
+    </div>
+  );
+}
+
+function NoResultsState({ onReset }: { onReset?: () => void }) {
+  return (
+    <EmptyState
+      icon={SearchX}
+      title="No results found"
+      description="We couldn't find what you're looking for. Try adjusting your search or filters."
+      action={
+        onReset
+          ? { label: 'Reset filters', onClick: onReset }
+          : undefined
+      }
+    />
+  );
+}
+
+function NoEventsState({ canCreate = true }: { canCreate?: boolean }) {
+  return (
+    <EmptyState
+      icon={CalendarOff}
+      title="No events yet"
+      description="There are no events matching your criteria. Be the first to create one or check back later."
+      action={
+        canCreate
+          ? { label: 'Create event', href: '/events/new' }
+          : { label: 'Refresh', onClick: () => window.location.reload() }
+      }
+    />
+  );
+}
+
+function NoNotificationsState() {
+  return (
+    <EmptyState
+      icon={BellOff}
+      title="No notifications"
+      description="You're all caught up! New notifications will appear here."
+    />
+  );
+}
+
+function NoBadgesState() {
+  return (
+    <EmptyState
+      icon={Trophy}
+      title="No badges yet"
+      description="Join events and complete challenges to earn your first badges."
+      action={{ label: 'Browse events', href: '/events' }}
+    />
+  );
+}
+
+function NoMembersState() {
+  return (
+    <EmptyState
+      icon={Users}
+      title="No members yet"
+      description="Your association is just getting started. Invite others to grow your community."
+      action={{ label: 'Invite members', onClick: () => {} }}
+    />
+  );
+}
+
+function ErrorState({ onRetry }: { onRetry?: () => void }) {
+  return (
+    <EmptyState
+      icon={FileX}
+      title="Something went wrong"
+      description="We couldn't load the content. Please try again."
+      action={
+        onRetry
+          ? { label: 'Try again', onClick: onRetry }
+          : { label: 'Go home', href: '/' }
+      }
+    />
+  );
+}
+
+export {
+  EmptyState,
+  NoResultsState,
+  NoEventsState,
+  NoNotificationsState,
+  NoBadgesState,
+  NoMembersState,
+  ErrorState,
+};

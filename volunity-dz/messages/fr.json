@@ -1,0 +1,322 @@
+{
+  "common": {
+    "appName": "Volunity DZ",
+    "tagline": "Plateforme de bénévolat intelligente",
+    "description": "Une plateforme de bénévolat alimentée par l'IA qui connecte les jeunes algériens avec des opportunités de bénévolat et des initiatives communautaires.",
+    "loading": "Chargement...",
+    "search": "Rechercher",
+    "seeMore": "Voir plus",
+    "seeAll": "Voir tout",
+    "joinNow": "Rejoindre",
+    "learnMore": "En savoir plus",
+    "getStarted": "Commencer",
+    "submit": "Envoyer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "yes": "Oui",
+    "no": "Non",
+    "or": "ou",
+    "filter": "Filtrer",
+    "all": "Tout",
+    "today": "Aujourd'hui",
+    "thisWeek": "Cette semaine",
+    "thisMonth": "Ce mois-ci",
+    "thisYear": "Cette année",
+    "allTime": "Tout le temps",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "verified": "Vérifié"
+  },
+  "nav": {
+    "home": "Accueil",
+    "events": "Événements",
+    "associations": "Associations",
+    "leaderboard": "Classement",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "notifications": "Notifications",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion",
+    "contact": "Contact",
+    "menu": "Menu"
+  },
+  "home": {
+    "hero": {
+      "badge": "Alimenté par l'IA",
+      "title": "Faites partie du changement",
+      "subtitle": "Rejoignez des milliers de jeunes algériens qui font la différence dans leurs communautés à travers le bénévolat et les événements sociaux.",
+      "ctaPrimary": "Commencez votre voyage",
+      "ctaSecondary": "Explorer les événements",
+      "trustText": "Approuvé par plus de",
+      "trustCount": "12 500+ bénévoles"
+    },
+    "stats": {
+      "volunteers": "Bénévoles actifs",
+      "events": "Événements réalisés",
+      "associations": "Associations partenaires",
+      "cities": "Villes participantes"
+    },
+    "features": {
+      "title": "Pourquoi Volunity DZ ?",
+      "subtitle": "Une plateforme complète qui réunit tout ce dont les bénévoles et les associations ont besoin en un seul endroit.",
+      "items": {
+        "ai": {
+          "title": "Recommandations IA",
+          "description": "Suggestions d'événements personnalisées qui correspondent à vos intérêts et votre localisation."
+        },
+        "qr": {
+          "title": "Présence QR",
+          "description": "Enregistrement rapide et sécurisé via scan de code QR."
+        },
+        "badges": {
+          "title": "Système de récompenses",
+          "description": "Gagnez des points, débloquez des badges et montez en niveau à chaque événement."
+        },
+        "community": {
+          "title": "Communauté active",
+          "description": "Connectez-vous avec des bénévoles et des associations à travers l'Algérie."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ça marche",
+      "subtitle": "Trois étapes simples pour commencer",
+      "steps": {
+        "1": {
+          "title": "Créez votre compte",
+          "description": "Inscrivez-vous en quelques minutes et choisissez vos intérêts"
+        },
+        "2": {
+          "title": "Découvrez les événements",
+          "description": "Parcourez les événements recommandés par l'IA près de chez vous"
+        },
+        "3": {
+          "title": "Faites du bénévolat",
+          "description": "Rejoignez des événements, gagnez des points et des badges"
+        }
+      }
+    },
+    "categories": {
+      "title": "Parcourir par catégorie",
+      "subtitle": "Six grands domaines de bénévolat"
+    },
+    "featured": {
+      "title": "Événements en vedette",
+      "subtitle": "Découvrez les derniers événements de bénévolat en Algérie"
+    },
+    "topVolunteers": {
+      "title": "Meilleurs bénévoles",
+      "subtitle": "Découvrez les bénévoles les plus actifs"
+    },
+    "associations": {
+      "title": "Associations partenaires",
+      "subtitle": "Collaborez avec les meilleures associations en Algérie"
+    },
+    "testimonials": {
+      "title": "Ce que disent nos utilisateurs",
+      "subtitle": "Des milliers de bénévoles et d'associations font confiance à Volunity"
+    },
+    "cta": {
+      "title": "Prêt à faire le changement ?",
+      "subtitle": "Rejoignez notre plateforme aujourd'hui et faites partie d'une communauté de bénévolat active",
+      "button": "Rejoindre gratuitement"
+    }
+  },
+  "events": {
+    "title": "Événements",
+    "subtitle": "Découvrez les événements de bénévolat à travers l'Algérie",
+    "createEvent": "Créer un événement",
+    "categories": "Catégories",
+    "allCategories": "Toutes les catégories",
+    "location": "Lieu",
+    "date": "Date",
+    "time": "Heure",
+    "participants": "Participants",
+    "capacity": "Capacité",
+    "organizer": "Organisateur",
+    "joinEvent": "Rejoindre l'événement",
+    "joined": "Rejoint",
+    "leaveEvent": "Quitter l'événement",
+    "noEvents": "Aucun événement disponible",
+    "noEventsDesc": "Essayez d'ajuster vos filtres ou revenez plus tard",
+    "details": {
+      "about": "À propos de l'événement",
+      "location": "Lieu",
+      "date": "Date et heure",
+      "category": "Catégorie",
+      "organizer": "Organisateur",
+      "participants": "Participants",
+      "gallery": "Galerie",
+      "schedule": "Programme",
+      "requirements": "Exigences",
+      "tags": "Tags"
+    },
+    "categories_list": {
+      "education": "Éducation",
+      "environment": "Environnement",
+      "health": "Santé",
+      "culture": "Culture",
+      "sports": "Sports",
+      "social": "Social"
+    },
+    "create": {
+      "title": "Créer un nouvel événement",
+      "step1": "Informations de base",
+      "step2": "Date et lieu",
+      "step3": "Détails",
+      "step4": "Revoir",
+      "fields": {
+        "title": "Titre de l'événement",
+        "description": "Description",
+        "category": "Catégorie",
+        "date": "Date",
+        "time": "Heure",
+        "location": "Lieu",
+        "city": "Ville",
+        "capacity": "Capacité",
+        "image": "Image de couverture",
+        "tags": "Tags"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bon retour",
+      "subtitle": "Connectez-vous pour continuer",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "createAccount": "Créer un compte",
+      "orContinueWith": "Ou continuer avec"
+    },
+    "register": {
+      "title": "Créer un nouveau compte",
+      "subtitle": "Rejoignez notre communauté de bénévoles",
+      "name": "Nom complet",
+      "email": "Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Créer un compte",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter"
+    },
+    "forgot": {
+      "title": "Mot de passe oublié",
+      "subtitle": "Entrez votre email et nous vous enverrons un lien de réinitialisation",
+      "email": "Email",
+      "submit": "Envoyer le lien de réinitialisation",
+      "backToLogin": "Retour à la connexion"
+    },
+    "googleLogin": "Continuer avec Google"
+  },
+  "footer": {
+    "about": "À propos",
+    "aboutText": "Volunity DZ est une plateforme de bénévolat alimentée par l'IA qui connecte les jeunes algériens avec des opportunités de bénévolat et des événements sociaux à travers le pays.",
+    "quickLinks": "Liens rapides",
+    "support": "Support",
+    "contactUs": "Contactez-nous",
+    "helpCenter": "Centre d'aide",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "followUs": "Suivez-nous",
+    "rights": "Tous droits réservés"
+  },
+  "profile": {
+    "title": "Profil",
+    "edit": "Modifier le profil",
+    "points": "Points",
+    "level": "Niveau",
+    "hours": "Heures de bénévolat",
+    "events": "Événements",
+    "badges": "Badges",
+    "achievements": "Réalisations",
+    "joined": "Rejoint",
+    "follow": "Suivre",
+    "following": "Suivi",
+    "message": "Message",
+    "tabs": {
+      "about": "À propos",
+      "events": "Événements",
+      "badges": "Badges",
+      "achievements": "Réalisations"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bon retour",
+    "overview": "Aperçu",
+    "aiRecommendations": "Recommandations IA",
+    "upcomingEvents": "Événements à venir",
+    "recentActivity": "Activité récente",
+    "achievements": "Réalisations",
+    "levelProgress": "Progression du niveau",
+    "stats": {
+      "points": "Points",
+      "hours": "Heures",
+      "events": "Événements",
+      "badges": "Badges"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Restez informé des dernières activités",
+    "all": "Tout",
+    "unread": "Non lues",
+    "markAllRead": "Tout marquer comme lu",
+    "empty": "Aucune notification",
+    "emptyDesc": "Vos notifications apparaîtront ici",
+    "categories": {
+      "events": "Événements",
+      "badges": "Badges",
+      "social": "Social",
+      "system": "Système"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "sections": {
+      "account": "Compte",
+      "notifications": "Notifications",
+      "privacy": "Confidentialité",
+      "language": "Langue",
+      "appearance": "Apparence",
+      "security": "Sécurité"
+    },
+    "fields": {
+      "name": "Nom",
+      "email": "Email",
+      "bio": "Bio",
+      "university": "Université",
+      "city": "Ville"
+    },
+    "theme": {
+      "title": "Thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    }
+  },
+  "empty": {
+    "noResults": "Aucun résultat",
+    "noResultsDesc": "Essayez d'ajuster votre recherche ou vos filtres",
+    "noEvents": "Aucun événement",
+    "noEventsDesc": "Soyez le premier à créer un événement",
+    "noNotifications": "Aucune notification",
+    "noNotificationsDesc": "Vos notifications apparaîtront ici",
+    "noBadges": "Aucun badge",
+    "noBadgesDesc": "Participez à des événements pour gagner vos premiers badges"
+  },
+  "loading": {
+    "default": "Chargement...",
+    "events": "Chargement des événements...",
+    "profile": "Chargement du profil..."
+  }
+}
