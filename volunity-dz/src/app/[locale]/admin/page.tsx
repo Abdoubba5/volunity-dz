@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Users, Calendar, FileText, Building2, Plus, Shield, BarChart3, ArrowRight } from 'lucide-react';
+import { Users, Calendar, FileText, Building2, Plus, Shield, BarChart3, ArrowRight, UserPlus, Clock } from 'lucide-react';
 import { GlassCard } from '@/components/glass-card';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/lib/auth-context';
@@ -22,6 +22,10 @@ export default function AdminOverviewPage() {
     totalEvents: number;
     totalPosts: number;
     totalAssociations: number;
+    totalParticipants: number;
+    totalAttendance: number;
+    upcomingEvents: number;
+    newUsersToday: number;
   } | null>(null);
 
   React.useEffect(() => {
@@ -54,10 +58,22 @@ export default function AdminOverviewPage() {
       gradient: 'from-brand-primary to-cyan-500',
     },
     {
+      label: 'New Today',
+      value: stats.newUsersToday,
+      icon: UserPlus,
+      gradient: 'from-sky-500 to-blue-500',
+    },
+    {
       label: 'Total Events',
       value: stats.totalEvents,
       icon: Calendar,
       gradient: 'from-brand-secondary to-emerald-500',
+    },
+    {
+      label: 'Upcoming',
+      value: stats.upcomingEvents,
+      icon: Clock,
+      gradient: 'from-teal-500 to-green-500',
     },
     {
       label: 'Total Posts',
@@ -70,6 +86,18 @@ export default function AdminOverviewPage() {
       value: stats.totalAssociations,
       icon: Building2,
       gradient: 'from-amber-400 to-yellow-600',
+    },
+    {
+      label: 'Participants',
+      value: stats.totalParticipants,
+      icon: Users,
+      gradient: 'from-pink-500 to-rose-500',
+    },
+    {
+      label: 'Attendance',
+      value: stats.totalAttendance,
+      icon: Shield,
+      gradient: 'from-indigo-500 to-violet-500',
     },
   ];
 

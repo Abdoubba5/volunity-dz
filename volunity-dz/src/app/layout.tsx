@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { Cairo, Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
+import { AnalyticsProvider } from '@/components/analytics-provider';
 import { ToastProvider } from '@/components/ui/use-toast';
 import { AuthProvider } from '@/lib/auth-context';
 import { locales, isRTL, type Locale, defaultLocale } from '@/i18n/config';
@@ -146,7 +147,13 @@ function detectLocale(): Locale {
 }
 
 function ClientProviders({ children }: { children: React.ReactNode }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <AuthProvider>
+      <AnalyticsProvider>
+        {children}
+      </AnalyticsProvider>
+    </AuthProvider>
+  );
 }
 
 export default function RootLayout({

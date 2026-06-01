@@ -29,7 +29,31 @@ export default async function middleware(request: NextRequest) {
 
   const isProtected = protectedPaths.includes(routeSegment);
   const isGuestRoute = guestPaths.includes(routeSegment);
-  const isAdminRoute = adminPaths.includes(routeSegment);
+  const isAdminRoute = adminPaths.includes(routeSegment) || (segments.length >= 1 && adminPaths.includes(segments[0]));
+  const isBareAdmin = segments.length >= 1 && adminPaths.includes(segments[0]) && !locales.includes(segments[0] as any);
+
+  if (isBareAdmin) {
+    if (!user) {
+      return NextResponse.redirect(new URL(`/${defaultLocale}/login`, request.url));
+    }
+
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (!profile || profile.role !== 'admin') {
+      return NextResponse.redirect(new URL(`/${defaultLocale}/dashboard`, request.url));
+    }
+
+    const response = supabaseResponse;
+    response.headers.set('x-volunity-locale', defaultLocale);
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    response.headers.set('X-Frame-Options', 'DENY');
+    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+    return response;
+  }
 
   if (!user && isProtected) {
     const loginUrl = new URL(`/${locale}/login`, request.url);

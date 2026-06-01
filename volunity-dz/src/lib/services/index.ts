@@ -7,4 +7,5 @@ export { getPostService } from './post.service';
 export { getCommentService } from './comment.service';
 export { getResourceService } from './resource.service';
 export { getLeaderboardService } from './leaderboard.service';
+export { getAnalyticsService } from './analytics.service';
 export type { DashboardStats } from './dashboard.service';

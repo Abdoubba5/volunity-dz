@@ -94,11 +94,36 @@ export function getDashboardService() {
         .from('associations')
         .select('*', { count: 'exact', head: true });
 
+      const { count: totalParticipants } = await supabase
+        .from('event_participants')
+        .select('*', { count: 'exact', head: true });
+
+      const { count: totalAttendance } = await supabase
+        .from('attendance')
+        .select('*', { count: 'exact', head: true });
+
+      const now = new Date().toISOString();
+      const { count: upcomingEvents } = await supabase
+        .from('events')
+        .select('*', { count: 'exact', head: true })
+        .gte('date', now);
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const { count: newUsersToday } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', today.toISOString());
+
       return {
         totalUsers: totalUsers || 0,
         totalEvents: totalEvents || 0,
         totalPosts: totalPosts || 0,
         totalAssociations: totalAssociations || 0,
+        totalParticipants: totalParticipants || 0,
+        totalAttendance: totalAttendance || 0,
+        upcomingEvents: upcomingEvents || 0,
+        newUsersToday: newUsersToday || 0,
       };
     },
   };
