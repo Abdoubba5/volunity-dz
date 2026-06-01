@@ -22,9 +22,9 @@ import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/config';
 
 const STATS_PREVIEW = [
-  { icon: Users, value: '12.5K+', label: 'Volunteers' },
+  { icon: Users, value: '12.5K+', label: 'Students' },
   { icon: Heart, value: '850+', label: 'Events' },
-  { icon: Globe2, value: '48', label: 'Cities' },
+  { icon: Globe2, value: '48', label: 'Faculties' },
 ];
 
 const FEATURES_PREVIEW = [
@@ -266,10 +266,10 @@ export function Hero() {
                       className="space-y-2"
                     >
                       <Badge variant="default" className="bg-primary/90">
-                        Environment
+                        Academic
                       </Badge>
-                      <h3 className="text-2xl font-bold">Beach Cleanup Campaign</h3>
-                      <p className="text-sm text-white/80">Sablette Beach, Algiers</p>
+                      <h3 className="text-2xl font-bold">Welcome Week 2026</h3>
+                      <p className="text-sm text-white/80">University of Algiers</p>
                     </motion.div>
                   </div>
                 </div>
@@ -288,14 +288,14 @@ export function Hero() {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Active now</p>
-                      <p className="text-lg font-bold">142 volunteers</p>
+                      <p className="text-lg font-bold">142 students</p>
                     </div>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.1, type: 'spring' }}
                   className="absolute top-1/3 -end-8 glass-premium p-4 w-64 animate-float"
                   style={{ animationDelay: '1s', transform: 'translateZ(60px)' }}
@@ -305,16 +305,13 @@ export function Hero() {
                       S
                     </div>
                     <div>
-                      <p className="text-sm font-semibold">Sarah Khaled</p>
-                      <p className="text-xs text-muted-foreground">Top Volunteer</p>
+                      <p className="text-sm font-semibold">Student</p>
+                      <p className="text-xs text-muted-foreground">University of Algiers</p>
                     </div>
-                    <Badge variant="glass" className="ms-auto text-[10px]">
-                      Lvl 12
-                    </Badge>
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-muted-foreground">Total points</span>
-                    <span className="gradient-text-static font-bold">2,450</span>
+                    <span className="text-muted-foreground">Events attended</span>
+                    <span className="gradient-text-static font-bold">12</span>
                   </div>
                 </motion.div>
 
@@ -333,9 +330,9 @@ export function Hero() {
                     </Badge>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Tree Planting Drive
+                    Career Fair 2026
                   </p>
-                  <p className="text-xs text-muted-foreground">Setif, June 25</p>
+                  <p className="text-xs text-muted-foreground">Algiers, June 25</p>
                 </motion.div>
               </div>
             </motion.div>

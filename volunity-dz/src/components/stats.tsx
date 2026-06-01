@@ -87,10 +87,10 @@ export function Stats() {
   const locale = useLocale() as Locale;
 
   const stats = [
-    { icon: Users, value: 12500, suffix: '+', label: t('volunteers'), gradient: 'from-brand-primary to-cyan-500', glow: 'glow-primary' },
-    { icon: Calendar, value: 850, suffix: '+', label: t('events'), gradient: 'from-brand-secondary to-emerald-500', glow: 'glow-secondary' },
-    { icon: Building2, value: 320, suffix: '+', label: t('associations'), gradient: 'from-brand-accent to-purple-500', glow: 'glow-accent' },
-    { icon: MapPin, value: 48, label: t('cities'), gradient: 'from-amber-500 to-orange-500', glow: '' },
+    { icon: Users, value: 12500, suffix: '+', label: 'Students', gradient: 'from-brand-primary to-cyan-500', glow: 'glow-primary' },
+    { icon: Calendar, value: 850, suffix: '+', label: 'Events', gradient: 'from-brand-secondary to-emerald-500', glow: 'glow-secondary' },
+    { icon: Building2, value: 320, suffix: '+', label: 'Associations', gradient: 'from-brand-accent to-purple-500', glow: 'glow-accent' },
+    { icon: MapPin, value: 48, label: 'Faculties', gradient: 'from-amber-500 to-orange-500', glow: '' },
   ];
 
   return (

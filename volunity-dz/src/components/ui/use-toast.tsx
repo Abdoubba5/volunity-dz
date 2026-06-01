@@ -75,7 +75,7 @@ export function useToast() {
     return {
       toast: (props: Omit<Toast, 'id'>) => {
         if (typeof window !== 'undefined') {
-          console.log('Toast:', props);
+          // Toast rendered
         }
       },
     };

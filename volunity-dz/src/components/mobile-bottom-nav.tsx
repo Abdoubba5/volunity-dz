@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Home, Calendar, Trophy, User as UserIcon, Plus } from 'lucide-react';
+import { Home, Calendar, User as UserIcon, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/config';
 
@@ -18,7 +18,6 @@ export function MobileBottomNav() {
     { href: `/${locale}`, label: t('home'), icon: Home },
     { href: `/${locale}/events`, label: t('events'), icon: Calendar },
     { href: `/${locale}/events/new`, label: '', icon: Plus, primary: true },
-    { href: `/${locale}/leaderboard`, label: t('leaderboard'), icon: Trophy },
     { href: `/${locale}/dashboard`, label: t('dashboard'), icon: UserIcon },
   ];
 
@@ -37,14 +36,10 @@ export function MobileBottomNav() {
         className="glass-strong rounded-2xl shadow-2xl shadow-black/40 border border-white/10 px-2 py-2 pointer-events-auto"
       >
         <div className="flex items-center justify-around relative">
-          {items.map((item, i) => {
+          {items.map((item) => {
             if (item.primary) {
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative -mt-7"
-                >
+                <Link key={item.href} href={item.href} className="relative -mt-7">
                   <motion.div
                     whileTap={{ scale: 0.9 }}
                     className="h-14 w-14 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center shadow-lg glow-primary"
@@ -73,9 +68,7 @@ export function MobileBottomNav() {
                   />
                 )}
                 <item.icon className="h-5 w-5 relative z-10" />
-                <span className="text-[10px] font-medium relative z-10">
-                  {item.label}
-                </span>
+                <span className="text-[10px] font-medium relative z-10">{item.label}</span>
               </Link>
             );
           })}

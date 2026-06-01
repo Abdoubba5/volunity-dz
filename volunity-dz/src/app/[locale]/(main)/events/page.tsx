@@ -9,13 +9,9 @@ import {
   Search,
   Grid3x3,
   List,
-  SlidersHorizontal,
   Calendar,
   MapPin,
-  Users,
   Sparkles,
-  TrendingUp,
-  Clock,
   X,
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -24,10 +20,10 @@ import { Badge } from '@/components/ui/badge';
 import { GlassCard } from '@/components/glass-card';
 import { SkeletonGrid } from '@/components/skeletons';
 import { NoEventsState } from '@/components/empty-state';
-import { cn, formatDate, getInitials, formatNumber } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
+import { getEventService } from '@/lib/services';
 import type { Locale } from '@/i18n/config';
-import type { Event } from '@/types';
-import { MOCK_EVENTS_FULL } from '@/lib/mock-data';
+import type { Event } from '@/lib/database.types';
 
 const CATEGORIES = [
   'all',
@@ -49,40 +45,32 @@ export default function EventsPage() {
   const [search, setSearch] = React.useState('');
   const [category, setCategory] = React.useState<typeof CATEGORIES[number]>(initialCategory);
   const [view, setView] = React.useState<'grid' | 'list'>('grid');
-  const [sort, setSort] = React.useState<'date' | 'popular' | 'newest'>('date');
+  const [events, setEvents] = React.useState<Event[]>([]);
   const [loading, setLoading] = React.useState(true);
-  const [showFilters, setShowFilters] = React.useState(false);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const filteredEvents = React.useMemo(() => {
-    let events = MOCK_EVENTS_FULL;
-
-    if (category !== 'all') {
-      events = events.filter((e) => e.category === category);
-    }
-
-    if (search) {
-      const q = search.toLowerCase();
-      events = events.filter(
-        (e) =>
-          e.title.toLowerCase().includes(q) ||
-          e.location.toLowerCase().includes(q) ||
-          e.description.toLowerCase().includes(q)
-      );
-    }
-
-    return events;
-  }, [search, category]);
+    const fetchEvents = async () => {
+      setLoading(true);
+      try {
+        const eventSvc = getEventService();
+        const data = await eventSvc.getEvents({
+          category: category === 'all' ? undefined : category,
+          search: search || undefined,
+        });
+        setEvents(data);
+      } catch {
+        setEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvents();
+  }, [category, search]);
 
   const activeFiltersCount = (category !== 'all' ? 1 : 0) + (search ? 1 : 0);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,10 +86,8 @@ export default function EventsPage() {
         <p className="lead text-pretty">{t('subtitle')}</p>
       </motion.div>
 
-      {/* Filters bar */}
       <GlassCard className="p-4 sm:p-6 mb-8">
         <div className="flex flex-col lg:flex-row gap-4">
-          {/* Search */}
           <div className="relative flex-1">
             <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -120,19 +106,7 @@ export default function EventsPage() {
             )}
           </div>
 
-          {/* Sort */}
           <div className="flex items-center gap-2">
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as any)}
-              className="h-10 px-3 rounded-xl glass text-sm bg-transparent focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
-            >
-              <option value="date">Upcoming</option>
-              <option value="popular">Most popular</option>
-              <option value="newest">Newest</option>
-            </select>
-
-            {/* View toggle */}
             <div className="flex items-center gap-1 glass p-1 rounded-xl">
               <Button
                 variant={view === 'grid' ? 'gradient' : 'ghost'}
@@ -156,7 +130,6 @@ export default function EventsPage() {
           </div>
         </div>
 
-        {/* Category filters */}
         <div className="flex flex-wrap gap-2 mt-4">
           {CATEGORIES.map((cat) => {
             const active = category === cat;
@@ -177,11 +150,10 @@ export default function EventsPage() {
           })}
         </div>
 
-        {/* Active filters count */}
         {activeFiltersCount > 0 && (
           <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
             <p className="text-xs text-muted-foreground">
-              {filteredEvents.length} results found
+              {events.length} results found
             </p>
             <Button
               variant="ghost"
@@ -197,10 +169,9 @@ export default function EventsPage() {
         )}
       </GlassCard>
 
-      {/* Loading state */}
       {loading ? (
         <SkeletonGrid count={6} />
-      ) : filteredEvents.length === 0 ? (
+      ) : events.length === 0 ? (
         <NoEventsState />
       ) : (
         <div
@@ -211,7 +182,7 @@ export default function EventsPage() {
               : 'flex flex-col max-w-4xl mx-auto'
           )}
         >
-          {filteredEvents.map((event, i) => (
+          {events.map((event, i) => (
             <EventCard
               key={event.id}
               event={event}
@@ -232,13 +203,12 @@ function EventCard({
   index,
   locale,
 }: {
-  event: typeof MOCK_EVENTS_FULL[number];
+  event: Event;
   view: 'grid' | 'list';
   index: number;
   locale: Locale;
 }) {
   const t = useTranslations('events');
-  const capacityPercent = (event.participants_count / event.capacity) * 100;
 
   if (view === 'list') {
     return (
@@ -250,11 +220,15 @@ function EventCard({
         <Link href={`/${locale}/events/${event.id}`} className="block group">
           <GlassCard hover className="p-0 overflow-hidden">
             <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-0">
-              <div className="relative h-40 sm:h-auto overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${event.image}')` }}
-                />
+              <div
+                className="relative h-40 sm:h-auto overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20"
+              >
+                {event.image_url && (
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                    style={{ backgroundImage: `url('${event.image_url}')` }}
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent sm:bg-gradient-to-r" />
                 <Badge variant="glass" className="absolute top-3 start-3 capitalize backdrop-blur-xl">
                   {t(`categories_list.${event.category}`)}
@@ -277,20 +251,7 @@ function EventCard({
                       <MapPin className="h-3.5 w-3.5" />
                       {event.location}
                     </span>
-                    <span className="flex items-center gap-1.5">
-                      <Users className="h-3.5 w-3.5" />
-                      {formatNumber(event.participants_count)} / {formatNumber(event.capacity)}
-                    </span>
                   </div>
-                </div>
-                <div className="flex items-center justify-between mt-3">
-                  <div className="flex items-center gap-2 text-xs">
-                    <Sparkles className="h-3.5 w-3.5 text-primary" />
-                    <span className="font-semibold">{event.points_reward} pts</span>
-                  </div>
-                  <Button variant="gradient" size="sm">
-                    {t('joinEvent')}
-                  </Button>
                 </div>
               </div>
             </div>
@@ -308,37 +269,18 @@ function EventCard({
     >
       <Link href={`/${locale}/events/${event.id}`} className="block group h-full">
         <GlassCard hover className="p-0 overflow-hidden h-full flex flex-col">
-          {/* Image */}
-          <div className="relative h-44 overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-              style={{ backgroundImage: `url('${event.image}')` }}
-            />
+          <div className="relative h-44 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
+            {event.image_url && (
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{ backgroundImage: `url('${event.image_url}')` }}
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-
             <Badge variant="glass" className="absolute top-3 start-3 capitalize backdrop-blur-xl">
               {t(`categories_list.${event.category}`)}
             </Badge>
-
-            {event.featured && (
-              <Badge variant="default" className="absolute top-3 end-3 gap-1">
-                <Sparkles className="h-3 w-3" />
-                Featured
-              </Badge>
-            )}
-
-            <div className="absolute bottom-3 end-3 glass px-2.5 py-1 rounded-full flex items-center gap-1.5 text-xs font-semibold">
-              <Users className="h-3 w-3" />
-              {formatNumber(event.participants_count)}
-            </div>
-
-            <div className="absolute bottom-3 start-3 glass px-2.5 py-1 rounded-full flex items-center gap-1.5 text-xs font-semibold">
-              <Sparkles className="h-3 w-3 text-primary" />
-              {event.points_reward} pts
-            </div>
           </div>
-
-          {/* Content */}
           <div className="p-5 flex-1 flex flex-col">
             <h3 className="font-bold text-base mb-2 line-clamp-1 group-hover:text-primary transition-colors">
               {event.title}
@@ -346,30 +288,10 @@ function EventCard({
             <p className="text-xs text-muted-foreground line-clamp-2 mb-4 flex-1">
               {event.description}
             </p>
-
-            {/* Capacity bar */}
-            <div className="mb-3">
-              <div className="flex items-center justify-between text-xs mb-1.5">
-                <span className="text-muted-foreground">Capacity</span>
-                <span className="font-medium">
-                  {Math.round(capacityPercent)}%
-                </span>
-              </div>
-              <div className="h-1.5 rounded-full bg-white/5 overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-brand-primary to-brand-accent transition-all"
-                  style={{ width: `${Math.min(capacityPercent, 100)}%` }}
-                />
-              </div>
-            </div>
-
             <div className="space-y-1.5 text-xs text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Calendar className="h-3.5 w-3.5 text-primary" />
                 <span>{formatDate(event.date, locale)}</span>
-                <span className="text-muted-foreground/60">•</span>
-                <Clock className="h-3.5 w-3.5 text-primary" />
-                <span>{event.time}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="h-3.5 w-3.5 text-primary" />

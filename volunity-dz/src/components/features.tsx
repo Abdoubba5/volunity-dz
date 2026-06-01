@@ -16,22 +16,22 @@ import { cn } from '@/lib/utils';
 const iconMap: Record<string, LucideIcon> = {
   ai: Sparkles,
   qr: QrCode,
-  badges: Trophy,
+  network: Users,
   community: Users,
 };
 
 const gradientMap: Record<string, string> = {
   ai: 'from-brand-primary to-cyan-500',
   qr: 'from-brand-secondary to-emerald-500',
-  badges: 'from-amber-400 to-orange-500',
-  community: 'from-brand-accent to-purple-500',
+  network: 'from-brand-accent to-purple-500',
+  community: 'from-amber-400 to-orange-500',
 };
 
 const glowMap: Record<string, string> = {
   ai: 'glow-primary',
   qr: 'glow-secondary',
-  badges: '',
-  community: 'glow-accent',
+  network: 'glow-accent',
+  community: '',
 };
 
 export function Features() {
@@ -40,7 +40,7 @@ export function Features() {
   const features = [
     { key: 'ai', icon: iconMap.ai, gradient: gradientMap.ai, glow: glowMap.ai },
     { key: 'qr', icon: iconMap.qr, gradient: gradientMap.qr, glow: glowMap.qr },
-    { key: 'badges', icon: iconMap.badges, gradient: gradientMap.badges, glow: glowMap.badges },
+    { key: 'network', icon: iconMap.network, gradient: gradientMap.network, glow: glowMap.network },
     { key: 'community', icon: iconMap.community, gradient: gradientMap.community, glow: glowMap.community },
   ];
 

@@ -6,6 +6,16 @@ import { createClient } from '@/lib/supabase/client';
 import type { Profile } from '@/lib/database.types';
 import type { User, Session } from '@supabase/supabase-js';
 
+type SignUpData = {
+  email: string;
+  password: string;
+  full_name: string;
+  university?: string;
+  faculty?: string;
+  department?: string;
+  academic_year?: string;
+};
+
 type AuthState = {
   user: User | null;
   profile: Profile | null;
@@ -15,7 +25,7 @@ type AuthState = {
 };
 
 type AuthActions = {
-  signUp: (email: string, password: string, name: string) => Promise<{ error?: string }>;
+  signUp: (data: SignUpData) => Promise<{ error?: string }>;
   signIn: (email: string, password: string) => Promise<{ error?: string }>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
@@ -112,18 +122,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [state.user, loadProfile]);
 
   const signUp = React.useCallback(
-    async (email: string, password: string, name: string) => {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
+    async (data: SignUpData) => {
+      const { data: authData, error } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
         options: {
-          data: { name },
+          data: {
+            full_name: data.full_name,
+            university: data.university || null,
+            faculty: data.faculty || null,
+            department: data.department || null,
+            academic_year: data.academic_year || null,
+          },
           emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
       if (error) return { error: error.message };
-      if (!data.user) return { error: 'Registration failed' };
+      if (!authData.user) return { error: 'Registration failed' };
 
       return {};
     },

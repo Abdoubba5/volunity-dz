@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn, formatDate } from '@/lib/utils';
 import type { Locale } from '@/i18n/config';
-import type { Event } from '@/types';
+import type { Event } from '@/lib/database.types';
 
 interface EventCardProps {
   event: Event;
@@ -32,9 +32,9 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
       <GlassCard hover className="overflow-hidden p-0 h-full flex flex-col group">
         {/* Image */}
         <div className="relative h-48 overflow-hidden">
-          {event.image ? (
+          {event.image_url ? (
             <Image
-              src={event.image}
+              src={event.image_url}
               alt={event.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -44,15 +44,16 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
 
-          {/* Category Badge */}
-          <Badge variant="glass" className="absolute top-3 start-3 capitalize">
-            {t(`categories_list.${event.category}`)}
-          </Badge>
+          {event.category && (
+            <Badge variant="glass" className="absolute top-3 start-3 capitalize">
+              {t(`categories_list.${event.category}`)}
+            </Badge>
+          )}
 
-          {/* Participants */}
+          {/* Category Label (replaces participants) */}
           <div className="absolute bottom-3 end-3 glass px-3 py-1 rounded-full flex items-center gap-1.5">
             <Users className="h-3.5 w-3.5" />
-            <span className="text-xs font-semibold">{event.participants_count}</span>
+            <span className="text-xs font-semibold">{t(`categories_list.${event.category}`)}</span>
           </div>
         </div>
 

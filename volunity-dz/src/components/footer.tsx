@@ -14,8 +14,10 @@ export function Footer() {
   const quickLinks = [
     { href: `/${locale}`, label: tNav('home') },
     { href: `/${locale}/events`, label: tNav('events') },
+    { href: `/${locale}/posts`, label: 'Posts' },
+    { href: `/${locale}/resources`, label: 'Resources' },
     { href: `/${locale}/associations`, label: tNav('associations') },
-    { href: `/${locale}/leaderboard`, label: tNav('leaderboard') },
+    { href: `/${locale}/contact`, label: tNav('contact') },
   ];
 
   const supportLinks = [

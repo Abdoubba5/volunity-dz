@@ -37,7 +37,7 @@ const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      'The gamification with badges and levels keeps our volunteers engaged and motivated. It is now the most popular platform in our network.',
+      'The platform helped us connect with hundreds of students across Algeria. It is now the most popular university network in our region.',
     name: 'Sara Mansouri',
     role: 'Program Coordinator',
     org: 'Youth for Education',

@@ -1,16 +1,10 @@
 import { createClient } from '@/lib/supabase/client';
 
 export interface DashboardStats {
-  totalPoints: number;
-  totalHours: number;
-  totalEvents: number;
-  totalBadges: number;
-  level: number;
-  pointsToNextLevel: number;
-  weeklyActivity: number;
-  monthlyEvents: number;
-  rank: number;
-  streak: number;
+  eventsRegistered: number;
+  eventsAttended: number;
+  postsCount: number;
+  upcomingEvents: number;
 }
 
 export function getDashboardService() {
@@ -18,78 +12,43 @@ export function getDashboardService() {
 
   return {
     async getStats(userId: string): Promise<DashboardStats> {
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-
-      if (profileError) throw profileError;
-      const p = profile as any;
-
-      // Get events this month
-      const startOfMonth = new Date();
-      startOfMonth.setDate(1);
-      startOfMonth.setHours(0, 0, 0, 0);
-
-      const { count: monthlyEvents } = await supabase
+      const { count: eventsRegistered } = await supabase
         .from('event_participants')
         .select('*', { count: 'exact', head: true })
-        .eq('user_id', userId)
-        .gte('joined_at', startOfMonth.toISOString());
+        .eq('user_id', userId);
 
-      // Get rank (count profiles with points >= current user's points)
-      const { count: rankCount } = await supabase
-        .from('profiles')
+      const { count: eventsAttended } = await supabase
+        .from('attendance')
         .select('*', { count: 'exact', head: true })
-        .gte('points', p.points);
+        .eq('user_id', userId);
 
-      const nextLevelPoints = (p.level + 1) * 200;
+      const { count: postsCount } = await supabase
+        .from('posts')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', userId);
 
-      return {
-        totalPoints: p.points || 0,
-        totalHours: p.hours_volunteered || 0,
-        totalEvents: p.events_joined || 0,
-        totalBadges: p.badges_count || 0,
-        level: p.level || 1,
-        pointsToNextLevel: Math.max(0, nextLevelPoints - p.points),
-        weeklyActivity: 0,
-        monthlyEvents: monthlyEvents || 0,
-        rank: rankCount || 0,
-        streak: 0,
-      };
-    },
-
-    async getRecentActivity(userId: string, limit = 10) {
-      // Get recent event participations
-      const { data: events } = await supabase
+      const now = new Date().toISOString();
+      const { count: upcomingEvents } = await supabase
         .from('event_participants')
-        .select('*, event:events(title)')
+        .select('*, event:events!inner(date)', { count: 'exact', head: true })
         .eq('user_id', userId)
-        .order('joined_at', { ascending: false })
-        .limit(limit);
-
-      // Get recent notifications
-      const { data: notifications } = await supabase
-        .from('notifications')
-        .select('*')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(limit);
+        .gte('event.date', now);
 
       return {
-        events: (events || []) as any[],
-        notifications: (notifications || []) as any[],
+        eventsRegistered: eventsRegistered || 0,
+        eventsAttended: eventsAttended || 0,
+        postsCount: postsCount || 0,
+        upcomingEvents: upcomingEvents || 0,
       };
     },
 
     async getUpcomingEvents(userId: string, limit = 5) {
+      const now = new Date().toISOString();
       const { data, error } = await supabase
         .from('event_participants')
         .select('*, event:events(*)')
         .eq('user_id', userId)
-        .eq('status', 'confirmed')
-        .gte('event.date', new Date().toISOString().split('T')[0])
+        .gte('event.date', now)
         .order('event.date', { ascending: true })
         .limit(limit);
 
@@ -97,33 +56,50 @@ export function getDashboardService() {
       return ((data || []) as any[]).map((d: any) => d.event).filter(Boolean);
     },
 
-    async getAIRecommendations(userId: string, limit = 3) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('city, events_joined')
-        .eq('id', userId)
-        .single();
+    async getRecentActivity(userId: string, limit = 10) {
+      const { data: events } = await supabase
+        .from('event_participants')
+        .select('*, event:events(title)')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        .limit(limit);
 
-      // Recommend events based on user's city and upcoming status
-      let query = supabase
-        .from('events')
+      const { data: posts } = await supabase
+        .from('posts')
         .select('*')
-        .in('status', ['upcoming', 'ongoing'])
-        .order('date', { ascending: true })
-        .limit(limit * 3);
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false })
+        .limit(limit);
 
-      const { data } = await query;
-      const events = ((data || []) as any[]).filter(
-        (e: any, i: number, arr: any[]) =>
-          arr.findIndex((x: any) => x.id === e.id) === i
-      );
+      return {
+        events: (events || []) as any[],
+        posts: (posts || []) as any[],
+      };
+    },
 
-      return events.slice(0, limit).map((event: any) => ({
-        id: event.id,
-        title: event.title,
-        match: Math.floor(Math.random() * 11) + 90,
-        category: event.category,
-      }));
+    async getAdminStats() {
+      const { count: totalUsers } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true });
+
+      const { count: totalEvents } = await supabase
+        .from('events')
+        .select('*', { count: 'exact', head: true });
+
+      const { count: totalPosts } = await supabase
+        .from('posts')
+        .select('*', { count: 'exact', head: true });
+
+      const { count: totalAssociations } = await supabase
+        .from('associations')
+        .select('*', { count: 'exact', head: true });
+
+      return {
+        totalUsers: totalUsers || 0,
+        totalEvents: totalEvents || 0,
+        totalPosts: totalPosts || 0,
+        totalAssociations: totalAssociations || 0,
+      };
     },
   };
 }

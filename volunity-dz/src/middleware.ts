@@ -19,16 +19,17 @@ export default async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const segments = pathname.split('/').filter(Boolean);
-  const firstSegment = segments[0];
-  const locale = locales.includes(firstSegment as any) ? firstSegment : defaultLocale;
+  const locale = locales.includes(segments[0] as any) ? segments[0] : defaultLocale;
 
   const protectedPaths = ['dashboard', 'notifications', 'settings', 'profile', 'qr-scan', 'events/new'];
   const guestPaths = ['login', 'register', 'forgot-password'];
+  const adminPaths = ['admin'];
 
   const routeSegment = segments[1] || '';
 
   const isProtected = protectedPaths.includes(routeSegment);
   const isGuestRoute = guestPaths.includes(routeSegment);
+  const isAdminRoute = adminPaths.includes(routeSegment);
 
   if (!user && isProtected) {
     const loginUrl = new URL(`/${locale}/login`, request.url);
@@ -41,6 +42,19 @@ export default async function middleware(request: NextRequest) {
     return NextResponse.redirect(dashboardUrl);
   }
 
+  if (isAdminRoute && user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (!profile || profile.role !== 'admin') {
+      const dashboardUrl = new URL(`/${locale}/dashboard`, request.url);
+      return NextResponse.redirect(dashboardUrl);
+    }
+  }
+
   const response = intlMiddleware(request);
 
   const supabaseCookies = supabaseResponse.headers.getSetCookie();
@@ -50,7 +64,6 @@ export default async function middleware(request: NextRequest) {
 
   response.headers.set('x-volunity-locale', locale);
 
-  // Production security headers (supplementing vercel.json)
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');

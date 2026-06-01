@@ -18,11 +18,6 @@ export function formatNumber(num: number, locale: string = 'en') {
   return new Intl.NumberFormat(locale).format(num);
 }
 
-export function truncateText(text: string, maxLength: number = 100) {
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength).trim() + '...';
-}
-
 export function getInitials(name: string) {
   return name
     .split(' ')

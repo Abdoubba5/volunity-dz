@@ -3,10 +3,10 @@
 import * as React from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { getNotificationService } from '@/lib/services/notification.service';
-import type { NotificationRow } from '@/lib/database.types';
+import type { Notification } from '@/lib/database.types';
 
 export function useNotifications(userId: string | undefined) {
-  const [notifications, setNotifications] = React.useState<NotificationRow[]>([]);
+  const [notifications, setNotifications] = React.useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
 
@@ -43,11 +43,11 @@ export function useNotifications(userId: string | undefined) {
         },
         (payload: any) => {
           if (payload.eventType === 'INSERT') {
-            setNotifications((prev) => [payload.new as NotificationRow, ...prev]);
+            setNotifications((prev) => [payload.new as Notification, ...prev]);
             setUnreadCount((c) => c + 1);
           } else if (payload.eventType === 'UPDATE') {
             setNotifications((prev) =>
-              prev.map((n) => (n.id === payload.new.id ? (payload.new as NotificationRow) : n))
+              prev.map((n) => (n.id === payload.new.id ? (payload.new as Notification) : n))
             );
             setUnreadCount((c) => Math.max(0, c - 1));
           }
@@ -61,7 +61,7 @@ export function useNotifications(userId: string | undefined) {
   const markAsRead = React.useCallback(async (id: string) => {
     const svc = getNotificationService();
     await svc.markAsRead(id);
-    setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
+    setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, is_read: true } : n)));
     setUnreadCount((c) => Math.max(0, c - 1));
   }, []);
 
@@ -69,7 +69,7 @@ export function useNotifications(userId: string | undefined) {
     if (!userId) return;
     const svc = getNotificationService();
     await svc.markAllAsRead(userId);
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+    setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
     setUnreadCount(0);
   }, [userId]);
 

@@ -16,10 +16,8 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/config';
-import type { EventCategory } from '@/types';
-
 interface CategoryConfig {
-  key: EventCategory;
+  key: string;
   icon: LucideIcon;
   gradient: string;
   count: number;

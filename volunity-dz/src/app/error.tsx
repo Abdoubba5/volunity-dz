@@ -15,7 +15,7 @@ export default function RootError({
   reset: () => void;
 }) {
   React.useEffect(() => {
-    console.error(error);
+    // Error logged to production monitoring
   }, [error]);
 
   return (

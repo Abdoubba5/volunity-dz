@@ -9,7 +9,6 @@ import {
   LayoutDashboard,
   Calendar,
   Users,
-  Trophy,
   Settings,
   User,
   Bell,
@@ -17,6 +16,8 @@ import {
   Shield,
   LogOut,
   Sparkles,
+  MessageSquare,
+  GraduationCap,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/config';
@@ -24,36 +25,32 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { useAuth } from '@/lib/auth-context';
 
 interface SidebarProps {
-  userRole?: 'user' | 'association' | 'admin';
+  userRole?: 'student' | 'moderator' | 'admin';
   userName?: string;
   userEmail?: string;
   userAvatar?: string;
 }
 
-export function Sidebar({ userRole = 'user', userName = 'User', userEmail = '', userAvatar }: SidebarProps) {
+export function Sidebar({ userRole = 'student', userName = 'User', userEmail = '', userAvatar }: SidebarProps) {
   const locale = useLocale() as Locale;
   const t = useTranslations('nav');
   const pathname = usePathname();
+  const { profile } = useAuth();
 
   const menuItems = React.useMemo(() => {
     const base = [
       { icon: LayoutDashboard, label: t('dashboard'), href: `/${locale}/dashboard` },
       { icon: Calendar, label: t('events'), href: `/${locale}/events` },
+      { icon: MessageSquare, label: 'Posts', href: `/${locale}/posts` },
+      { icon: GraduationCap, label: 'Resources', href: `/${locale}/resources` },
       { icon: User, label: t('profile'), href: `/${locale}/profile` },
-      { icon: Trophy, label: t('leaderboard'), href: `/${locale}/leaderboard` },
       { icon: Bell, label: 'Notifications', href: `/${locale}/notifications` },
     ];
 
-    if (userRole === 'association') {
-      base.push(
-        { icon: Users, label: 'My Members', href: `/${locale}/dashboard/members` },
-        { icon: BarChart3, label: 'Analytics', href: `/${locale}/dashboard/analytics` }
-      );
-    }
-
-    if (userRole === 'admin') {
+    if (userRole === 'admin' || profile?.role === 'admin') {
       base.push(
         { icon: Shield, label: 'Admin Panel', href: `/${locale}/admin` },
         { icon: Users, label: 'Manage Users', href: `/${locale}/admin/users` },
@@ -64,19 +61,18 @@ export function Sidebar({ userRole = 'user', userName = 'User', userEmail = '', 
     base.push({ icon: Settings, label: t('settings'), href: `/${locale}/settings` });
 
     return base;
-  }, [locale, t, userRole]);
+  }, [locale, t, userRole, profile?.role]);
 
   const isActive = (href: string) => pathname === href;
 
   const roleBadgeVariant = {
-    user: 'glass' as const,
-    association: 'secondary' as const,
+    student: 'glass' as const,
+    moderator: 'secondary' as const,
     admin: 'accent' as const,
   };
 
   return (
     <aside className="hidden lg:flex flex-col w-72 h-screen sticky top-0 border-r border-white/10 bg-background/50 backdrop-blur-xl">
-      {/* Logo */}
       <div className="p-6 border-b border-white/10">
         <Link href={`/${locale}`} className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent flex items-center justify-center shadow-lg glow-primary">
@@ -89,7 +85,6 @@ export function Sidebar({ userRole = 'user', userName = 'User', userEmail = '', 
         </Link>
       </div>
 
-      {/* User info */}
       <div className="p-4 border-b border-white/10">
         <div className="flex items-center gap-3 p-3 rounded-xl glass">
           <Avatar className="h-10 w-10">
@@ -106,7 +101,6 @@ export function Sidebar({ userRole = 'user', userName = 'User', userEmail = '', 
         </div>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 overflow-y-auto p-4 space-y-1">
         {menuItems.map((item, index) => (
           <motion.div
@@ -144,7 +138,6 @@ export function Sidebar({ userRole = 'user', userName = 'User', userEmail = '', 
 
       <Separator className="bg-white/10" />
 
-      {/* Logout */}
       <div className="p-4">
         <Button variant="glass" className="w-full justify-start gap-3" size="lg">
           <LogOut className="h-5 w-5" />

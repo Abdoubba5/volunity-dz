@@ -12,7 +12,7 @@ import {
   Bell,
   Search,
   User as UserIcon,
-  ChevronDown,
+  Shield,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -50,7 +50,6 @@ export function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
   React.useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
@@ -64,18 +63,24 @@ export function Navbar() {
 
   const { user, profile, isAuthenticated, signOut } = useAuth();
 
-  const userName = profile?.name || user?.user_metadata?.name || '';
+  const userName = profile?.full_name || user?.user_metadata?.name || '';
   const userAvatar = profile?.avatar_url || '';
+  const isAdmin = profile?.role === 'admin';
 
   const navLinks = [
     { href: `/${locale}`, label: t('home') },
     { href: `/${locale}/events`, label: t('events') },
+    { href: `/${locale}/posts`, label: 'Posts' },
+    { href: `/${locale}/resources`, label: 'Resources' },
     { href: `/${locale}/associations`, label: t('associations') },
-    { href: `/${locale}/leaderboard`, label: t('leaderboard') },
   ];
 
   if (isAuthenticated) {
     navLinks.push({ href: `/${locale}/dashboard`, label: t('dashboard') });
+  }
+
+  if (isAdmin) {
+    navLinks.push({ href: `/${locale}/admin`, label: 'Admin' });
   }
 
   const isActive = (href: string) => {
@@ -98,7 +103,6 @@ export function Navbar() {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
             <Link
               href={`/${locale}`}
               className="flex-shrink-0 transition-transform hover:scale-105"
@@ -106,7 +110,6 @@ export function Navbar() {
               <Logo size="md" />
             </Link>
 
-            {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
                 <Link
@@ -131,12 +134,9 @@ export function Navbar() {
               ))}
             </nav>
 
-            {/* Right side actions */}
             <div className="flex items-center gap-1.5 sm:gap-2">
               <ThemeToggle />
               <LanguageSwitcher />
-
-              {/* Notifications */}
               <NotificationsMenu />
 
               <div className="hidden md:flex items-center gap-2 ms-2">
@@ -172,6 +172,17 @@ export function Navbar() {
                       <DropdownMenuItem asChild>
                         <Link href={`/${locale}/settings`} className="cursor-pointer">{t('settings')}</Link>
                       </DropdownMenuItem>
+                      {isAdmin && (
+                        <>
+                          <DropdownMenuSeparator className="bg-white/10" />
+                          <DropdownMenuItem asChild>
+                            <Link href={`/${locale}/admin`} className="cursor-pointer">
+                              <Shield className="h-4 w-4 me-2" />
+                              Admin Panel
+                            </Link>
+                          </DropdownMenuItem>
+                        </>
+                      )}
                       <DropdownMenuSeparator className="bg-white/10" />
                       <DropdownMenuItem
                         className="text-destructive cursor-pointer"
@@ -186,12 +197,7 @@ export function Navbar() {
                     <Button asChild variant="ghost" size="sm">
                       <Link href={`/${locale}/login`}>{t('login')}</Link>
                     </Button>
-                    <Button
-                      asChild
-                      variant="gradient"
-                      size="sm"
-                      className="gap-2 glow-primary"
-                    >
+                    <Button asChild variant="gradient" size="sm" className="gap-2 glow-primary">
                       <Link href={`/${locale}/register`}>
                         <Sparkles className="h-4 w-4" />
                         {t('register')}
@@ -201,26 +207,20 @@ export function Navbar() {
                 )}
               </div>
 
-              {/* Mobile menu button */}
               <Button
                 variant="glass"
                 size="icon"
                 className="lg:hidden rounded-full ms-1"
                 onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label={tCommon('loading') === 'loading' ? 'Menu' : t('menu')}
+                aria-label="Menu"
               >
-                {mobileOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
+                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
           </div>
         </div>
       </motion.header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -243,7 +243,6 @@ export function Navbar() {
               )}
             >
               <div className="flex flex-col h-full p-6 pt-24">
-                {/* Search */}
                 <div className="relative mb-4">
                   <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
@@ -312,27 +311,15 @@ export function Navbar() {
 
                 <div className="flex flex-col gap-3 pt-6 border-t border-white/10">
                   {isAuthenticated ? (
-                    <>
-                      <Button
-                        variant="glass"
-                        size="lg"
-                        className="w-full gap-2 text-destructive"
-                        onClick={() => signOut()}
-                      >
-                        {t('logout')}
-                      </Button>
-                    </>
+                    <Button variant="glass" size="lg" className="w-full gap-2 text-destructive" onClick={() => signOut()}>
+                      {t('logout')}
+                    </Button>
                   ) : (
                     <>
                       <Button asChild variant="glass" size="lg" className="w-full">
                         <Link href={`/${locale}/login`}>{t('login')}</Link>
                       </Button>
-                      <Button
-                        asChild
-                        variant="gradient"
-                        size="lg"
-                        className="w-full gap-2"
-                      >
+                      <Button asChild variant="gradient" size="lg" className="w-full gap-2">
                         <Link href={`/${locale}/register`}>
                           <Sparkles className="h-4 w-4" />
                           {t('register')}

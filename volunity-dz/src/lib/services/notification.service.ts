@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/client';
-import type { NotificationRow } from '@/lib/database.types';
+import type { Notification } from '@/lib/database.types';
 
 export function getNotificationService() {
   const supabase = createClient();
@@ -8,21 +8,21 @@ export function getNotificationService() {
     async getNotifications(
       userId: string,
       options?: { type?: string; unreadOnly?: boolean; limit?: number }
-    ): Promise<NotificationRow[]> {
+    ): Promise<Notification[]> {
       let query = supabase
         .from('notifications')
         .select('*')
         .eq('user_id', userId);
 
       if (options?.type) query = query.eq('type', options.type);
-      if (options?.unreadOnly) query = query.eq('read', false);
+      if (options?.unreadOnly) query = query.eq('is_read', false);
 
       query = query.order('created_at', { ascending: false });
       if (options?.limit) query = query.limit(options.limit);
 
       const { data, error } = await query;
       if (error) throw error;
-      return (data || []) as NotificationRow[];
+      return (data || []) as Notification[];
     },
 
     async getUnreadCount(userId: string): Promise<number> {
@@ -30,7 +30,7 @@ export function getNotificationService() {
         .from('notifications')
         .select('*', { count: 'exact', head: true })
         .eq('user_id', userId)
-        .eq('read', false);
+        .eq('is_read', false);
       if (error) throw error;
       return count || 0;
     },
@@ -38,7 +38,7 @@ export function getNotificationService() {
     async markAsRead(notificationId: string): Promise<void> {
       const { error } = await supabase
         .from('notifications')
-        .update({ read: true })
+        .update({ is_read: true } as any)
         .eq('id', notificationId);
       if (error) throw error;
     },
@@ -46,30 +46,29 @@ export function getNotificationService() {
     async markAllAsRead(userId: string): Promise<void> {
       const { error } = await supabase
         .from('notifications')
-        .update({ read: true })
+        .update({ is_read: true } as any)
         .eq('user_id', userId)
-        .eq('read', false);
+        .eq('is_read', false);
       if (error) throw error;
     },
 
-    async createNotification(notification: {
+    async create(notification: {
       user_id: string;
-      type: NotificationRow['type'];
       title: string;
-      description?: string;
-      icon?: string;
-      link?: string;
-    }): Promise<NotificationRow> {
+      message?: string;
+      type: Notification['type'];
+      related_id?: string;
+    }): Promise<Notification> {
       const { data, error } = await supabase
         .from('notifications')
         .insert(notification as any)
         .select()
         .single();
       if (error) throw error;
-      return data as NotificationRow;
+      return data as Notification;
     },
 
-    async deleteNotification(notificationId: string): Promise<void> {
+    async delete(notificationId: string): Promise<void> {
       const { error } = await supabase
         .from('notifications')
         .delete()
@@ -77,7 +76,7 @@ export function getNotificationService() {
       if (error) throw error;
     },
 
-    subscribeToNotifications(userId: string, callback: (payload: any) => void) {
+    subscribe(userId: string, callback: (payload: any) => void) {
       return supabase
         .channel(`notifications:${userId}`)
         .on(

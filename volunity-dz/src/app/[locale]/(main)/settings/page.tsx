@@ -101,8 +101,16 @@ export default function SettingsPage() {
           <Input id="university" defaultValue="USTHB" className="mt-1.5" />
         </div>
         <div>
-          <Label htmlFor="city">{t('fields.city')}</Label>
-          <Input id="city" defaultValue="Algiers" className="mt-1.5" />
+          <Label htmlFor="faculty">{t('fields.faculty')}</Label>
+          <Input id="faculty" defaultValue="Technology" className="mt-1.5" />
+        </div>
+        <div>
+          <Label htmlFor="department">{t('fields.department')}</Label>
+          <Input id="department" defaultValue="Computer Science" className="mt-1.5" />
+        </div>
+        <div>
+          <Label htmlFor="academicYear">{t('fields.academicYear')}</Label>
+          <Input id="academicYear" defaultValue="L3" className="mt-1.5" />
         </div>
       </div>
 
@@ -125,7 +133,7 @@ export default function SettingsPage() {
           { icon: Mail, title: 'Email notifications', desc: 'Receive emails for important updates', defaultChecked: true },
           { icon: Smartphone, title: 'Push notifications', desc: 'Get push notifications on your device', defaultChecked: true },
           { icon: Bell, title: 'Event reminders', desc: 'Reminders 24h and 2h before events', defaultChecked: true },
-          { icon: Sparkles, title: 'New badges', desc: 'Notify me when I earn a new badge', defaultChecked: true },
+          { icon: Sparkles, title: 'New events', desc: 'Notify me about new events in my faculty', defaultChecked: true },
           { icon: Users, title: 'Social updates', desc: 'New followers, comments, and mentions', defaultChecked: false },
         ].map((item, i) => (
           <motion.div
@@ -161,7 +169,7 @@ export default function SettingsPage() {
         {[
           { title: 'Public profile', desc: 'Anyone can view your profile', defaultChecked: true },
           { title: 'Show my events', desc: 'Display events I join on my profile', defaultChecked: true },
-          { title: 'Show my badges', desc: 'Display earned badges publicly', defaultChecked: true },
+          { title: 'Show my events', desc: 'Display events I attend publicly', defaultChecked: true },
           { title: 'Allow messages', desc: 'Let other users send you messages', defaultChecked: false },
           { title: 'Show online status', desc: 'Display when you are online', defaultChecked: true },
         ].map((item) => (

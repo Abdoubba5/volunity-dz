@@ -21,7 +21,7 @@ export default function NotFound() {
               </Link>
             </Button>
             <Button variant="glass" asChild className="gap-2">
-              <Link href="/en/events">
+              <Link href="/events">
                 <Search className="h-4 w-4" />
                 Browse events
               </Link>

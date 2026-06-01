@@ -187,7 +187,7 @@ export default function QrScanPage() {
                   </div>
                   <h2 className="text-xl font-bold mb-1">You&apos;re checked in 🎉</h2>
                   <p className="text-sm text-muted-foreground">
-                    You earned 150 points for attending
+                    Your attendance has been recorded
                   </p>
                 </motion.div>
               )}

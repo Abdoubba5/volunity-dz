@@ -1,8 +1,8 @@
 {
   "common": {
     "appName": "Volunity DZ",
-    "tagline": "AI Powered Volunteering Platform",
-    "description": "An AI-powered volunteering platform connecting Algerian youth with volunteer opportunities, social initiatives, and community projects.",
+    "tagline": "AI Powered University Platform",
+    "description": "An AI-powered platform connecting Algerian university students with campus events, student clubs, and academic resources.",
     "loading": "Loading...",
     "search": "Search",
     "seeMore": "See more",
@@ -50,38 +50,38 @@
   "home": {
     "hero": {
       "badge": "AI-Powered",
-      "title": "Be Part of the Change",
-      "subtitle": "Join thousands of Algerian youth making a difference in their communities through volunteering and social events.",
-      "ctaPrimary": "Start your journey",
+      "title": "Your University Hub",
+      "subtitle": "Connect with fellow students, discover campus events, join student clubs, and access study resources — all in one place.",
+      "ctaPrimary": "Get started",
       "ctaSecondary": "Explore events",
       "trustText": "Trusted by more than",
-      "trustCount": "12,500+ volunteers"
+      "trustCount": "12,500+ students"
     },
     "stats": {
-      "volunteers": "Active volunteers",
-      "events": "Events completed",
-      "associations": "Partner associations",
-      "cities": "Cities involved"
+      "volunteers": "Active students",
+      "events": "Events organized",
+      "associations": "Student clubs",
+      "cities": "Faculties involved"
     },
     "features": {
       "title": "Why Volunity DZ?",
-      "subtitle": "A complete platform that brings together everything volunteers and associations need in one place.",
+      "subtitle": "Everything you need for an engaging university experience in one platform.",
       "items": {
         "ai": {
           "title": "AI Recommendations",
-          "description": "Personalized event suggestions that match your interests and location."
+          "description": "Personalized event suggestions that match your interests and faculty."
         },
         "qr": {
           "title": "QR Attendance",
           "description": "Fast and secure check-in via QR code scanning."
         },
         "badges": {
-          "title": "Rewards System",
-          "description": "Earn points, unlock badges, and level up with every event."
+          "title": "Student Network",
+          "description": "Connect with students across faculties and build your campus network."
         },
         "community": {
           "title": "Active Community",
-          "description": "Connect with volunteers and associations across Algeria."
+          "description": "Join student clubs and participate in university life."
         }
       }
     },
@@ -91,47 +91,47 @@
       "steps": {
         "1": {
           "title": "Create your account",
-          "description": "Sign up in minutes and pick your interests"
+          "description": "Sign up with your university email and pick your faculty"
         },
         "2": {
           "title": "Discover events",
-          "description": "Browse AI-recommended events near you"
+          "description": "Browse AI-recommended campus events near you"
         },
         "3": {
-          "title": "Volunteer & earn",
-          "description": "Join events, earn points and badges"
+          "title": "Join & participate",
+          "description": "Attend events, join clubs, and grow your network"
         }
       }
     },
     "categories": {
       "title": "Browse by category",
-      "subtitle": "Six main volunteering fields"
+      "subtitle": "Discover events across campus"
     },
     "featured": {
       "title": "Featured Events",
-      "subtitle": "Discover the latest volunteering events in Algeria"
+      "subtitle": "Discover the latest campus events"
     },
     "topVolunteers": {
-      "title": "Top Volunteers",
-      "subtitle": "Meet the most active volunteers"
+      "title": "Top Students",
+      "subtitle": "Meet the most active students"
     },
     "associations": {
-      "title": "Partner Associations",
-      "subtitle": "Collaborate with the best associations in Algeria"
+      "title": "Student Clubs",
+      "subtitle": "Collaborate with the best student clubs on campus"
     },
     "testimonials": {
       "title": "What our users say",
-      "subtitle": "Thousands of volunteers and associations trust Volunity"
+      "subtitle": "Thousands of students trust Volunity"
     },
     "cta": {
-      "title": "Ready to make a change?",
-      "subtitle": "Join our platform today and be part of an active volunteering community",
+      "title": "Ready to get involved?",
+      "subtitle": "Join our platform today and start your university journey",
       "button": "Join for free"
     }
   },
   "events": {
     "title": "Events",
-    "subtitle": "Discover volunteering events across Algeria",
+    "subtitle": "Discover campus events across all faculties",
     "createEvent": "Create event",
     "categories": "Categories",
     "allCategories": "All categories",
@@ -200,7 +200,7 @@
     },
     "register": {
       "title": "Create new account",
-      "subtitle": "Join our volunteering community",
+      "subtitle": "Join our campus community",
       "name": "Full name",
       "email": "Email",
       "password": "Password",
@@ -220,7 +220,7 @@
   },
   "footer": {
     "about": "About",
-    "aboutText": "Volunity DZ is an AI-powered volunteering platform connecting Algerian youth with volunteer opportunities and social events across the country.",
+    "aboutText": "Volunity DZ is an AI-powered university platform connecting Algerian students with campus events, student clubs, and academic resources.",
     "quickLinks": "Quick links",
     "support": "Support",
     "contactUs": "Contact us",
@@ -233,21 +233,12 @@
   "profile": {
     "title": "Profile",
     "edit": "Edit profile",
-    "points": "Points",
-    "level": "Level",
-    "hours": "Volunteer hours",
     "events": "Events",
-    "badges": "Badges",
-    "achievements": "Achievements",
     "joined": "Joined",
-    "follow": "Follow",
-    "following": "Following",
     "message": "Message",
     "tabs": {
       "about": "About",
-      "events": "Events",
-      "badges": "Badges",
-      "achievements": "Achievements"
+      "events": "Events"
     }
   },
   "dashboard": {
@@ -259,10 +250,7 @@
     "achievements": "Achievements",
     "levelProgress": "Level progress",
     "stats": {
-      "points": "Points",
-      "hours": "Hours",
-      "events": "Events",
-      "badges": "Badges"
+      "events": "Events"
     }
   },
   "notifications": {
@@ -275,7 +263,6 @@
     "emptyDesc": "Your notifications will appear here",
     "categories": {
       "events": "Events",
-      "badges": "Badges",
       "social": "Social",
       "system": "System"
     }
@@ -295,7 +282,9 @@
       "email": "Email",
       "bio": "Bio",
       "university": "University",
-      "city": "City"
+      "faculty": "Faculty",
+      "department": "Department",
+      "academicYear": "Academic year"
     },
     "theme": {
       "title": "Theme",
@@ -310,9 +299,7 @@
     "noEvents": "No events",
     "noEventsDesc": "Be the first to create an event",
     "noNotifications": "No notifications",
-    "noNotificationsDesc": "Your notifications will appear here",
-    "noBadges": "No badges",
-    "noBadgesDesc": "Join events to earn your first badges"
+    "noNotificationsDesc": "Your notifications will appear here"
   },
   "loading": {
     "default": "Loading...",
