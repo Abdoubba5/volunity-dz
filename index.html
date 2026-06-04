@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="منصة وعي الشباب BBA - منصة متكاملة لمكافحة إدمان المخدرات والاستشارات النفسية المجهولة والتطوع">
+    <title>منصة وعي الشباب BBA | Dz Young Leaders</title>
+    
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <style>
+        /* Inline Critical Styles for FOUC Prevention */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #06090e;
+            color: #e5e7eb;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation Header -->
+    <header class="navbar sticky-navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h1 class="brand-title">منصة وعي الشباب BBA</h1>
+                <p class="brand-tagline">برنامج قادة الشباب الجزائريين</p>
+            </div>
+            
+            <nav class="navbar-menu" id="navbarMenu">
+                <a href="#hero" class="nav-link active" data-section="hero">الرئيسية</a>
+                <a href="#awareness" class="nav-link" data-section="awareness">مركز التوعية</a>
+                <a href="#consultation" class="nav-link" data-section="consultation">الاستشارات</a>
+                <a href="#volunteer" class="nav-link" data-section="volunteer">التطوع</a>
+                <a href="admin.html" class="nav-link admin-link">لوحة الإدارة</a>
+            </nav>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="تبديل القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h2 class="hero-title">منصة وعي الشباب BBA</h2>
+            <p class="hero-subtitle">منصة متكاملة لمكافحة إدمان المخدرات والمواد المؤثرة على الحالة النفسية</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('consultation')">استشارة نفسية مجهولة</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('volunteer')">انضم إلى فريق التطوع</button>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+    </section>
+
+    <!-- Drug Awareness & Prevention Center -->
+    <section id="awareness" class="awareness-section">
+        <div class="section-container">
+            <h2 class="section-title">مركز التوعية والوقاية</h2>
+            <p class="section-subtitle">معلومات شاملة عن مخاطر الإدمان والوقاية الفعالة</p>
+            
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Articles will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Anonymous Secure Consultation System -->
+    <section id="consultation" class="consultation-section">
+        <div class="section-container">
+            <h2 class="section-title">نظام الاستشارة النفسية المجهولة الآمنة</h2>
+            <p class="section-subtitle">احصل على رمز تتبع فريد وآمن للاستشارة مع فريق متخصص</p>
+            
+            <div class="consultation-container">
+                <div class="consultation-card">
+                    <h3>اطلب رمز تتبع فريد</h3>
+                    <p class="consultation-description">عند الضغط على الزر أدناه، سيتم إنشاء رمز تتبع فريد وآمن. استخدم هذا الرمز للاحتفاظ بخصوصيتك التامة أثناء الاستشارة.</p>
+                    <button class="btn btn-primary" id="generateCodeBtn" onclick="generateSecureCode()">إنشاء رمز تتبع فريد</button>
+                </div>
+                
+                <div class="code-display-wrapper" id="codeDisplayWrapper" style="display: none;">
+                    <div class="code-display">
+                        <div class="code-header">رمز التتبع الفريد الخاص بك</div>
+                        <div class="secure-code-container">
+                            <div class="secure-code" id="secureCode">BBA-XXXX-XXXX</div>
+                            <button class="copy-button" id="copyCodeBtn" onclick="copyToClipboard()" title="انسخ الرمز">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="code-info">احفظ هذا الرمز في مكان آمن. ستحتاجه للتواصل مع فريق الاستشارة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteer Onboarding Form -->
+    <section id="volunteer" class="volunteer-section">
+        <div class="section-container">
+            <h2 class="section-title">نموذج التطوع</h2>
+            <p class="section-subtitle">انضم إلى فريق برنامج قادة الشباب الجزائريين وكن جزءاً من التغيير الإيجابي</p>
+            
+            <form class="volunteer-form" id="volunteerForm" onsubmit="submitVolunteerForm(event)">
+                <div class="form-group">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="أدخل اسمك الكامل" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" name="phone" placeholder="أدخل رقم هاتفك" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">العمر</label>
+                    <input type="number" id="age" name="age" min="18" placeholder="أدخل عمرك" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="municipality">بلدية الإقامة</label>
+                    <select id="municipality" name="municipality" required>
+                        <option value="" disabled selected>اختر بلديتك</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="membership-label">نوع العضوية</label>
+                    <div class="membership-selector">
+                        <input type="radio" id="memberExecutive" name="membershipType" value="عضو فعال في الإدارة" required>
+                        <label for="memberExecutive" class="membership-option">
+                            <span class="membership-icon">👤</span>
+                            <span class="membership-text">عضو فعال في الإدارة</span>
+                        </label>
+                        
+                        <input type="radio" id="memberOrganization" name="membershipType" value="عضو في التنظيم" required>
+                        <label for="memberOrganization" class="membership-option">
+                            <span class="membership-icon">👥</span>
+                            <span class="membership-text">عضو في التنظيم</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="motivation">دافعك للتطوع</label>
+                    <textarea id="motivation" name="motivation" placeholder="شارك معنا سبب رغبتك في التطوع" rows="5" required></textarea>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                    <label for="agreeTerms">أوافق على شروط البرنامج وسياسة الخصوصية</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-submit">إرسال طلب التطوع</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن البرنامج</h4>
+                <p>برنامج قادة الشباب الجزائريين موقف وتعاون مستمر من أجل بناء جيل واعي ومسؤول.</p>
+            </div>
+            <div class="footer-section">
+                <h4>المنطقة</h4>
+                <p>ولاية برج بوعريريج، الجزائر</p>
+            </div>
+            <div class="footer-section">
+                <h4>التواصل</h4>
+                <p>البريد: info@bba.dz</p>
+                <p>الهاتف: +213 XXX XXX XXX</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 منصة وعي الشباب BBA | جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
